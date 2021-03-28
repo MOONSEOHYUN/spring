@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+			<!-- db연결설정 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="hr2"/>
+		<property name="password" value="1111"/>
+	</bean>
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>	<!-- 위의 빈(dataSource)을 가지고 공장을 짓겠다 -->
+		<property name="configLocation" value="classpath:/mybatisConfig.xml"/>
+		<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml"/>  <!-- mappers 폴더  /**/:하위폴더  *.Mapper: 모든 매퍼 파일]-->
+	</bean>
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">	<!-- 객체 관리를 쉽게 해주는? -->
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<!-- 파일 업로드 디렉토리 bean생성 -->
+	<!-- String saveDir="D:/msh/upload" -->
+	<bean id="saveDir" class="java.lang.String">
+		<constructor-arg value="D:/msh/upload"/>
+	</bean>
+	
+	<!-- JUNIT 테스트 -->
+   	<context:component-scan base-package="com.spring.food.dao" />
+	<context:component-scan base-package="com.spring.food.service" /> 
+	
+	<!-- 암호화 위한 bean생성 -->
+	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<!-- salt값 생성자에 추가 -->
+		<constructor-arg name="strength" value="5"/>
+	</bean>  	
+	
+	   <!-- email 인증 관련   -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="username" value="moonti92@gmail.com"/>
+        <property name="password" value="fjgusldi77" />
+        <property name="javaMailProperties">
+            <props>
+            	<!-- <prop key="mail.smtp.host">smtp.gmail.com</prop> -->
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+	
+ 	<!-- aop설정을 통해 자동으로 proxy 객체 생성 -->
+	<!-- <aop:aspectj-autoproxy/> -->
+	
+	<!-- 트랜잭션 매니저 객체 생성 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 트랜잭션어노테이션 이용가능 -->
+    <tx:annotation-driven/>
+</beans>

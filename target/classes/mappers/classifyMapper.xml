@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.food.ClassifyMapper">
+	
+	<!-- 게시물 조회/좋아요/싫어요 id저장 -->
+	<insert id="insert">
+		insert into classify (gubun,num,id,likegubun)values(#{gubun},#{num},#{id},#{likegubun})
+	</insert>
+	
+	<!-- 게시물 조회/좋아요/싫어요 한 유저 -->
+	<select id="selectOne" resultType="ClassifyDTO">
+		select * from classify
+		where gubun=#{gubun}
+		and num=#{num}
+		and id=#{id}
+		and likegubun=#{likegubun}
+	</select>
+	
+	<!--  -->
+	<delete id="delete">
+		delete from classify
+		where gubun=#{gubun}
+		and num=#{num}
+		and id=#{id}
+		and likegubun=#{likegubun}
+	</delete>
+	
+</mapper>

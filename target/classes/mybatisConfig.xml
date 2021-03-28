@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- null허용 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+    <typeAliases>
+		<typeAlias type="com.spring.food.dto.MemberDTO" alias="MemberDTO"/>
+		<typeAlias type="com.spring.food.dto.BoardDTO" alias="BoardDTO"/>
+		<typeAlias type="com.spring.food.dto.BoardFileDTO" alias="BoardFileDTO"/>
+		<typeAlias type="com.spring.food.dto.ReplyDTO" alias="ReplyDTO"/>
+		<typeAlias type="com.spring.food.dto.ClassifyDTO" alias="ClassifyDTO"/>
+		<typeAlias type="com.spring.food.dto.FoodAdditivesDTO" alias="FoodAdditivesDTO"/>
+	</typeAliases>
+
+
+</configuration>
