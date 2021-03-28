@@ -73,7 +73,7 @@ public class BoardController {
 		}
 		
 //		조회수+1
-		bservice.updateReadcount(bnum,id);
+		bservice.updateReadcnt(bnum,id);
 				
 		Map<String,Object> resultMap=bservice.selectOne(bnum);
 		

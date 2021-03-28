@@ -127,25 +127,15 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void updateReadcount(int bnum, String id) throws Exception {
+	public void updateReadcnt(int bnum, String id) throws Exception {
 //		기존에 조회한 유저가 있는지 조회
 		ClassifyDTO cdto=cservice.selectOne(1, bnum, id);
 		//유저가 있다면 
 		if(cdto!=null) return ;	
 				
-//		만약 조회 사용자가 없다면
-//		1.insert
-//		있다면
-//		2.조회수+1
-
-//		1.게시물 조회
-//		2.게시물 좋아요
-//		3.게시물 싫어요
-//		4.댓글 좋아요
-//		5.댓글 싫어요
 		cservice.insert(1, bnum, id);
 		
-		bdao.updateReadcount(bnum);
+		bdao.updateReadcnt(bnum);
 	}
 	
 //	게시물만 조회(좋아요, 싫어요를 위한)
@@ -154,7 +144,7 @@ public class BoardServiceImpl implements BoardService{
 		return bdao.selectOne(bnum);
 	}
 
-//	좋아요+1
+//	좋아요
 	@Override
 	public void updateLikecnt(int bnum, String id) throws Exception {
 //		싫어요 유저 삭제
@@ -178,7 +168,7 @@ public class BoardServiceImpl implements BoardService{
 		bdao.updateLikecnt(bnum);
 
 	}
-//	싫어요+1
+//	싫어요
 	@Override
 	public void updateDislikecnt(int bnum, String id) throws Exception {
 //		좋아요->싫어요
@@ -188,13 +178,12 @@ public class BoardServiceImpl implements BoardService{
 			bdao.updateLikecntMinus(bnum);
 		}
 		
-		
 		ClassifyDTO cdto=cservice.selectOne(3, bnum, id);
 		//유저가 있다면 싫어요수 안올라감
 		if(cdto!=null) return ;	
 				
 //		만약 조회 사용자가 없다면
-//		likeUser테이블에 insert
+//		classify테이블에 insert
 		cservice.insert(3, bnum, id);
 //		board테이블에 있는 dislikecnt수를 update
 		bdao.updateDislikecnt(bnum);

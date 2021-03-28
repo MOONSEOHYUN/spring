@@ -41,8 +41,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public void updateReadcount(int bnum) throws Exception {
-		session.update("com.spring.food.BoardMapper.updateReadcount",bnum);
+	public void updateReadcnt(int bnum) throws Exception {
+		session.update("com.spring.food.BoardMapper.updateReadcnt",bnum);
 	}
 
 	@Override

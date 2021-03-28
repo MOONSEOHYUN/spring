@@ -16,12 +16,13 @@
 			<input type="hidden" class="restep" value="{{restep}}">
 			<input type="hidden" class="relevel" value="{{relevel}}">
 			<input type="hidden" class="rnum" value="{{rnum}}">
-			<input type="text" class="id" value="{{id}}">
-			<br>
+			<input type="text" class="id" value="{{id}}">  <br>
 			<textarea rows="3" cols="20" class="content">{{content}}</textarea><br>
 			<button class="btnReplyUpdate">수정</button>
 			<button class="btnReplyDelete">삭제</button>
-			<button class="btnReply">댓글</button>
+			<button class="btnReply">댓글</button> |
+			<button class="btnRLike">좋아요</button> <span class="RLikecnt">${resultMap.rdto.likecnt}</span> 
+			<button class="btnRDislike">싫어요</button> <span class="RDislikecnt">${resultMap.rdto.dislikecnt}</span><br>
 			<div class='replyAdd'></div>
 		</div>
 
@@ -104,7 +105,7 @@
 		
 		//댓글추가 버튼을 눌렀을때
 		$('body').on('click', '.btnReplyAdd', function() {
-			//userid체크
+			//id체크
 			const session_id = '${sessionScope.id}';
 			if (session_id==''){
 				alert('로그인 후 추가하세요');
@@ -115,9 +116,6 @@
 			const replycontent = $(this).parent().find('#replycontent').val(); 
 			const restep = $(this).parent().find('#restep').val();
 			const relevel = $(this).parent().find('#relevel').val();
- 			//alert(replycontent);
-			//alert(restep);
-			//alert(relevel);
 			
 			if (replycontent==''){
 				alert('댓글 내용을 입력해주세요');
@@ -132,12 +130,10 @@
 				data : JSON.stringify({bnum:bnum,content:replycontent,restep:restep,relevel:relevel}),//json문자열
 				dataType: 'text',
 				success: function(result) {
-					//alert(result);
 					//원본 댓글추가 html삭제
 					$('#replyAdd').html('');
 					//댓글의 댓글 추가 삭제
 					console.log($(this).parent().parent().html());
-					//replyList() ; //댓글 리스트 
 				},
 				error: function(result) {
 					alert('error');
@@ -149,8 +145,6 @@
 		
 		//원본의 댓글 버튼을 눌렀을때
 		$('#btnReply').on('click',function() {
-			//alert(restep);
-			//alert(relevel);
 						
 			const data = {'restep':0, 'relevel':0}; 
 			
@@ -165,8 +159,6 @@
 		$('#replyList').on('click', '.btnReply', function() {
 			const restep = $(this).parent().find('.restep').val();
 			const relevel = $(this).parent().find('.relevel').val();
-			//alert(restep);
-			//alert(relevel);
 			const data = {restep, relevel}; 
 			
 			//탬플릿을 이용하여 화면에 출력
@@ -216,7 +208,7 @@
 			console.log(rnum);
 			console.log(id);
 			
-			//userid체크
+			//id체크
 			const session_id = '${sessionScope.id}';
 			if (id != session_id){
 				alert('삭제권한이 없습니다');
@@ -235,6 +227,48 @@
 					alert('error');
 				}
 			});
+		});
+		
+		//댓글 좋아요
+		$('#replyList').on('click','.btnRLike',function(){
+			const rnum=$(this).parent().find('.rnum').val();
+
+			$.ajax({
+				type: 'get',
+				url: '${path}/reply/ReplyLikecnt/'+rnum,
+				dataType: 'json',
+				success: function(result) {
+					//alert(result);
+					$('.RLikecnt').html(result.likecnt);
+					$('.RDislikecnt').html(result.dislikecnt);
+				},
+				error: function(result) {
+					alert('error');
+					console.log(result);
+				}
+			});
+			
+		});
+		
+		//댓글 싫어요
+		$('#replyList').on('click','.btnRDislike',function(){
+			const rnum=$(this).parent().find('.rnum').val();
+
+			$.ajax({
+				type: 'get',
+				url: '${path}/reply/ReplyDislikecnt/'+rnum,
+				dataType: 'json',
+				success: function(result) {
+					//alert(result);
+					$('.RLikecnt').html(result.likecnt);
+					$('.RDislikecnt').html(result.dislikecnt);
+				},
+				error: function(result) {
+					alert('error');
+					console.log(result);
+				}
+			});
+			
 		});
 		
 		//댓글 리스트 조회
@@ -277,7 +311,7 @@
 </script>
 </head>
 <body>
-	<section style="overflow:scroll; height:750px;">
+	<section style="overflow:auto; height:750px;">
 		<h2>상세조회</h2>
 		<br>
 		번호 <input type="text" id="bnum" value="${resultMap.bdto.bnum }" readonly="readonly"><br>

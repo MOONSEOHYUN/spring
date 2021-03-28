@@ -18,7 +18,7 @@ public interface BoardDAO {
 	public BoardDTO selectOne(int bnum) throws Exception;
 	
 //	조회수
-	public void updateReadcount(int bnum) throws Exception;
+	public void updateReadcnt(int bnum) throws Exception;
 //	좋아요
 	public void updateLikecnt(int bnum) throws Exception;
 //	싫어요

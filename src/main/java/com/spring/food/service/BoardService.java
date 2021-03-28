@@ -16,7 +16,7 @@ public interface BoardService {
 	public Map<String,Object> selectOne(int bnum) throws Exception;
 	
 //	조회수
-	public void updateReadcount(int bnum, String id) throws Exception;
+	public void updateReadcnt(int bnum, String id) throws Exception;
 //	좋아요
 	public void updateLikecnt(int bnum, String id) throws Exception;
 //	싫어요

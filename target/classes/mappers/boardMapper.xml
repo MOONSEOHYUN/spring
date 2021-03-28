@@ -64,9 +64,9 @@
 	</delete>
 	
 	<!-- 조회수+1 -->
-	<update id="updateReadcount">
+	<update id="updateReadcnt">
 		update board
-		set readcount=readcount+1
+		set readcnt=readcnt+1
 		where bnum=#{bnum}
 	</update>
 	

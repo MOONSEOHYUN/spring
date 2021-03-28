@@ -36,9 +36,6 @@
 				</c:choose>
 			</c:forEach>
 			<c:forEach var="fa" items="${falist }" >
-<%-- 				<c:if test="${!i.last }">
-					<span id="arrSpan">${fa }</span>
-				</c:if>  --%>
 				,<span id="arrSpan">${fa }</span>
 			</c:forEach>
 		</div>	

@@ -106,6 +106,7 @@
 						<input type="text" name="id" size="10" id="id">
 						<input type="hidden" id="idCheckYn">	<!-- value가 y이면 체크완료 -->
 						<input type="button" value="중복체크" id="btnIdCheck">		<!-- submit 기능 없음 -->
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="${apiURL}"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG" alt="네이버"/></a>
 					</td>
 				</tr>
 				<tr>

@@ -25,7 +25,7 @@
 				<td>{{bnum}}</td>
 				<td>{{id}}</td>
 				<td><a href='${path}/board/detail/{{bnum}}'>{{subject}}</td>
-				<td>{{readcount}}</td>
+				<td>{{readcnt}}</td>
 				<td>{{likecnt}}</td>
 				<td>{{dislikecnt}}</td>
 				<td>{{regdate}}</td>

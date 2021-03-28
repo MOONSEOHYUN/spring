@@ -69,13 +69,13 @@
 		
 	}
 
-$(function(){
-	//버튼 클릭했을때
-	$('#btnMsg').on('click',sendmsg );
-	//메시지 변경됐을때
-	$('.write_msg').on('change',sendmsg );
-
-});
+	$(function(){
+		//버튼 클릭했을때
+		$('#btnMsg').on('click',sendmsg );
+		//메시지 변경됐을때
+		$('.write_msg').on('change',sendmsg );
+	
+	});
     
 </script>
     
