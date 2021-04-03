@@ -7,6 +7,10 @@
 		insert into foodadditives (pcode,pname)values(#{pcode},#{pname})
 	</insert>	
 	
+	<select id="pcodeSelectOne" resultType="FoodAdditivesDTO">
+		select * from foodadditives where pcode=#{pcode}
+	</select>
+	
 	<select id="foodAddSelectOne" resultType="FoodAdditivesDTO">
 		select * from foodadditives where pname=#{pname}
 	</select>

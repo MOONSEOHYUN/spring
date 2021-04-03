@@ -72,7 +72,12 @@ public class FoodController {
 	}
 	
 	
-	
+//	식품첨가물 api db저장
+	@RequestMapping(value="/db", method=RequestMethod.GET)
+	public String db() throws Exception{
+		faservice.FoodAdditives();
+		return "food/foodList";
+	}
 	
 	
 	

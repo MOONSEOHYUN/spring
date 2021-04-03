@@ -17,6 +17,11 @@ public class FoodAdditivesDAOImpl implements FoodAdditivesDAO{
 	public void foodAddInsert(FoodAdditivesDTO fadto) throws Exception {
 		session.insert("com.spring.food.FoodAdditivesMapper.foodAddInsert",fadto);
 	}
+	
+	@Override
+	public FoodAdditivesDTO pcodeSelectOne(String pcode) throws Exception {
+		return session.selectOne("com.spring.food.FoodAdditivesMapper.pcodeSelectOne",pcode);
+	}
 
 	@Override
 	public FoodAdditivesDTO foodAddSelectOne(String pcode) throws Exception {

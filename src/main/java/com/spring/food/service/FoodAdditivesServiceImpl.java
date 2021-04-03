@@ -83,7 +83,7 @@ public class FoodAdditivesServiceImpl implements FoodAdditivesService{
 	    			String nname=node.getNodeName();
 	    			
 	    			if(nname.equals("PRDLST_CD")) {
-	    				if(fadao.foodAddSelectOne(node.getTextContent())!=null) {
+	    				if(fadao.pcodeSelectOne(node.getTextContent())!=null) {
 	    					break;
 	    				}
 	    				

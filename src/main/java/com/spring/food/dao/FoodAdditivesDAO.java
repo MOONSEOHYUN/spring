@@ -7,6 +7,8 @@ import com.spring.food.dto.FoodAdditivesDTO;
 public interface FoodAdditivesDAO {
 //	식품첨가물 추가
 	public void foodAddInsert(FoodAdditivesDTO fadto) throws Exception;
+//	pcode 존재 여부
+	public FoodAdditivesDTO pcodeSelectOne(String pcode) throws Exception;
 //	식품첨가물 존재 여부
 	public FoodAdditivesDTO foodAddSelectOne(String pcode) throws Exception;
 //	식품첨가물 리스트

@@ -61,7 +61,11 @@
 			
 		});
 		
-		
+		$('#btnDB').on('click', function(e){
+			e.preventDefault();
+			
+			location.href='${path}/food/db';
+		});
 		
 		
 		
@@ -81,6 +85,7 @@
 			</select>
 			<input type="text" name="value" size="50">
 			<button id="btnFList">검색</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="btnDB">DB저장</button>
 		</form>
 		
 		<div id="foodList"></div>
